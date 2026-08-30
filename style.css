@@ -1,0 +1,280 @@
+/* ==========================================================================
+   stuart blair developer profile
+   typographic direction: peter saville / factory records / jan tschichold
+   asymmetric grid, helvetica only, no capitals, one spot colour
+   ========================================================================== */
+
+:root {
+  --black: #0a0a0a;
+  --white: #f2f2ee;
+  --grey: #6b6b66;
+  --grey-line: #2a2a27;
+  --accent: #ff4d00; /* factory orange */
+  --max: 1120px;
+  --edge: clamp(1.25rem, 4vw, 3rem);
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font);
+  text-transform: lowercase;
+  font-variant-caps: normal;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--black); }
+
+a {
+  color: inherit;
+  text-decoration-color: var(--grey);
+  text-underline-offset: 0.2em;
+}
+a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  padding: clamp(2rem, 6vw, 4rem) var(--edge) 0;
+  border-bottom: 1px solid var(--grey-line);
+}
+
+.masthead .catalogue {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--grey);
+  padding-bottom: clamp(2rem, 8vw, 5rem);
+}
+
+.masthead .catalogue span:last-child { color: var(--accent); }
+
+.name {
+  font-weight: 700;
+  font-size: clamp(3rem, 10vw, 8.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+}
+
+.role-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em 1.4em;
+  align-items: baseline;
+  padding-bottom: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+}
+
+.role-line .role { color: var(--white); }
+.role-line .meta { color: var(--grey); font-size: 0.85em; letter-spacing: 0.04em; }
+
+/* ---------- sections: asymmetric two-column grid ---------- */
+
+.section {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--edge);
+  border-bottom: 1px solid var(--grey-line);
+}
+
+.section .fac {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  padding-top: 0.25rem;
+}
+
+.section h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.25rem;
+}
+
+.section .body {
+  max-width: 62ch;
+  color: var(--white);
+}
+
+.section .body p { margin: 0 0 1rem; color: #d8d8d2; }
+.section .body p:last-child { margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  .section { grid-template-columns: 1fr; }
+  .section .fac { padding-top: 0; }
+}
+
+/* ---------- fac 002: scrobble spectrograph ---------- */
+
+.spectrograph .body { max-width: none; }
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.profile-text .body,
+.profile-text p { max-width: 52ch; }
+
+.profile-chart { align-self: center; }
+
+@media (max-width: 800px) {
+  .profile-grid { grid-template-columns: 1fr; }
+  .profile-chart { order: -1; }
+}
+
+.chart-frame {
+  border: 1px solid var(--grey-line);
+  background: var(--black);
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.chart-frame svg { display: block; width: 100%; height: auto; }
+
+/* ---------- fac 003: experience ---------- */
+
+.role-entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--grey-line);
+}
+.role-entry:first-child { border-top: none; padding-top: 0; }
+
+.role-entry .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+
+.role-entry .title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.role-entry .sector { color: var(--grey); }
+
+.role-entry .dates {
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.role-entry ul {
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.role-entry li {
+  color: #d8d8d2;
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  position: relative;
+}
+.role-entry li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--grey);
+}
+
+/* ---------- fac 004: capability ---------- */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.75rem 2rem;
+}
+
+.skills-grid h3 {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--grey);
+  font-weight: 400;
+  margin: 0 0 0.6rem;
+}
+
+.skills-grid p {
+  margin: 0;
+  color: #d8d8d2;
+  line-height: 1.6;
+}
+
+/* ---------- fac 005: education ---------- */
+
+.edu-entry { padding: 1rem 0; border-top: 1px solid var(--grey-line); }
+.edu-entry:first-child { border-top: none; padding-top: 0; }
+.edu-entry .row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+}
+.edu-entry .title { font-weight: 700; }
+.edu-entry .dates { color: var(--accent); font-size: 0.82rem; letter-spacing: 0.06em; }
+.edu-entry p { color: #d8d8d2; margin: 0.4rem 0 0; }
+
+/* ---------- fac 006: contact ---------- */
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-list a {
+  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--grey-line);
+}
+.contact-list a:hover { color: var(--accent); }
+
+/* ---------- footer ---------- */
+
+footer {
+  padding: 2.5rem var(--edge) 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--grey);
+}
+
+/* ---------- reveal-on-scroll (respects reduced motion) ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
