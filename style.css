@@ -1,9 +1,9 @@
 /* ==========================================================================
    stuart blair developer profile
    typographic direction: peter saville / factory records / jan tschichold
-   asymmetric grid, helvetica only, no capitals, one spot colour
+   asymmetric grid, helvetica, lowercase, one spot colour, colour cipher
    ========================================================================== */
-
+ 
 :root {
   --black: #0a0a0a;
   --white: #f2f2ee;
@@ -13,12 +13,23 @@
   --max: 1120px;
   --edge: clamp(1.25rem, 4vw, 3rem);
   --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+ 
+  /* peter saville colour cipher */
+  --sc-pink: #f5b8d4;
+  --sc-magenta: #e6158a;
+  --sc-skyblue: #8ed8f8;
+  --sc-green: #27a373;
+  --sc-blue: #009fe3;
+  --sc-yellow: #f5e400;
+  --sc-orange: #f7941d;
+  --sc-purple: #8f86ba;
+  --sc-white: #ffffff;
 }
-
+ 
 * { box-sizing: border-box; }
-
+ 
 html { -webkit-text-size-adjust: 100%; }
-
+ 
 body {
   margin: 0;
   background: var(--black);
@@ -29,29 +40,42 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-
+ 
+/* ---------- hacienda hazard stripe ---------- */
+ 
+body::before {
+  content: "";
+  display: block;
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--black) 0 10px,
+    var(--accent) 10px 20px
+  );
+}
+ 
 ::selection { background: var(--accent); color: var(--black); }
-
+ 
 a {
   color: inherit;
   text-decoration-color: var(--grey);
   text-underline-offset: 0.2em;
 }
 a:hover { text-decoration-color: var(--accent); color: var(--accent); }
-
+ 
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 var(--edge);
 }
-
+ 
 /* ---------- masthead ---------- */
-
+ 
 .masthead {
   padding: clamp(2rem, 6vw, 4rem) var(--edge) 0;
   border-bottom: 1px solid var(--grey-line);
 }
-
+ 
 .masthead .catalogue {
   display: flex;
   justify-content: space-between;
@@ -60,9 +84,9 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   color: var(--grey);
   padding-bottom: clamp(2rem, 8vw, 5rem);
 }
-
+ 
 .masthead .catalogue span:last-child { color: var(--accent); }
-
+ 
 .name {
   font-weight: 700;
   font-size: clamp(3rem, 10vw, 8.5rem);
@@ -70,7 +94,7 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   letter-spacing: -0.03em;
   margin: 0 0 1.5rem;
 }
-
+ 
 .role-line {
   display: flex;
   flex-wrap: wrap;
@@ -79,12 +103,12 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   padding-bottom: clamp(2rem, 6vw, 3.5rem);
   font-size: clamp(1rem, 2.4vw, 1.35rem);
 }
-
+ 
 .role-line .role { color: var(--white); }
 .role-line .meta { color: var(--grey); font-size: 0.85em; letter-spacing: 0.04em; }
-
+ 
 /* ---------- sections: asymmetric two-column grid ---------- */
-
+ 
 .section {
   display: grid;
   grid-template-columns: 96px 1fr;
@@ -92,65 +116,109 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   padding: clamp(2.5rem, 6vw, 4.5rem) var(--edge);
   border-bottom: 1px solid var(--grey-line);
 }
-
+ 
 .section .fac {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   color: var(--accent);
   padding-top: 0.25rem;
 }
-
+ 
+/* heading + cipher on one line: text left, cipher right */
+.heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+ 
 .section h2 {
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.01em;
-  margin: 0 0 1.25rem;
+  margin: 0;
 }
-
+ 
+/* colour cipher: decorative, the heading text to its left still
+   carries the actual content. blocks sit flush against each other (no
+   gap, no per-letter borders) so the strip reads as one continuous image,
+   a single border wraps the whole strip instead. */
+.cipher {
+  display: flex;
+  flex-shrink: 0;
+  border: 1px solid var(--black);
+}
+ 
+.cipher-letter {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.cipher-letter span { flex: 1; }
+ 
+.cipher-gap { width: 8px; }
+ 
+@media (max-width: 480px) {
+  .heading-row {
+    flex-wrap: wrap;
+  }
+}
+ 
 .section .body {
   max-width: 62ch;
   color: var(--white);
+  /* exposes the column module instead of leaving it as implied whitespace,
+     a tschichold-style visible grid rather than a decorative rule */
+  border-left: 1px solid var(--grey-line);
+  padding-left: clamp(1.5rem, 4vw, 3rem);
 }
-
+ 
 .section .body p { margin: 0 0 1rem; color: #d8d8d2; }
 .section .body p:last-child { margin-bottom: 0; }
-
+ 
 @media (max-width: 640px) {
   .section { grid-template-columns: 1fr; }
   .section .fac { padding-top: 0; }
+  .section .body {
+    border-left: none;
+    padding-left: 0;
+  }
 }
-
-/* ---------- fac 002: scrobble spectrograph ---------- */
-
+ 
+/* ---------- fac 001: profile + scrobble spectrograph ---------- */
+ 
 .spectrograph .body { max-width: none; }
-
+ 
 .profile-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
-
+ 
 .profile-text .body,
 .profile-text p { max-width: 52ch; }
-
+ 
 .profile-chart { align-self: center; }
-
+ 
 @media (max-width: 800px) {
   .profile-grid { grid-template-columns: 1fr; }
   .profile-chart { order: -1; }
 }
-
+ 
 .chart-frame {
   border: 1px solid var(--grey-line);
   background: var(--black);
   padding: clamp(0.75rem, 2vw, 1.5rem);
 }
-
+ 
 .chart-frame svg { display: block; width: 100%; height: auto; }
-
-/* ---------- fac 003: experience ---------- */
-
+ 
+/* ---------- fac 002: experience ---------- */
+ 
 .role-entry {
   display: grid;
   grid-template-columns: 1fr;
@@ -159,7 +227,7 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   border-top: 1px solid var(--grey-line);
 }
 .role-entry:first-child { border-top: none; padding-top: 0; }
-
+ 
 .role-entry .row {
   display: flex;
   justify-content: space-between;
@@ -167,21 +235,21 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   flex-wrap: wrap;
   gap: 0.4rem 1rem;
 }
-
+ 
 .role-entry .title {
   font-weight: 700;
   font-size: 1.05rem;
 }
-
+ 
 .role-entry .sector { color: var(--grey); }
-
+ 
 .role-entry .dates {
   color: var(--accent);
   font-size: 0.82rem;
   letter-spacing: 0.06em;
   white-space: nowrap;
 }
-
+ 
 .role-entry ul {
   margin: 0.6rem 0 0;
   padding: 0;
@@ -198,15 +266,15 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   left: 0;
   color: var(--grey);
 }
-
-/* ---------- fac 004: capability ---------- */
-
+ 
+/* ---------- fac 003: capability ---------- */
+ 
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.75rem 2rem;
 }
-
+ 
 .skills-grid h3 {
   font-size: 0.78rem;
   letter-spacing: 0.1em;
@@ -214,15 +282,15 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   font-weight: 400;
   margin: 0 0 0.6rem;
 }
-
+ 
 .skills-grid p {
   margin: 0;
   color: #d8d8d2;
   line-height: 1.6;
 }
-
-/* ---------- fac 005: education ---------- */
-
+ 
+/* ---------- fac 004: education ---------- */
+ 
 .edu-entry { padding: 1rem 0; border-top: 1px solid var(--grey-line); }
 .edu-entry:first-child { border-top: none; padding-top: 0; }
 .edu-entry .row {
@@ -235,29 +303,53 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
 .edu-entry .title { font-weight: 700; }
 .edu-entry .dates { color: var(--accent); font-size: 0.82rem; letter-spacing: 0.06em; }
 .edu-entry p { color: #d8d8d2; margin: 0.4rem 0 0; }
-
+ 
+/* ---------- fac 005: publications ---------- */
+ 
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+ 
+.pub-entry {
+  margin: 0;
+  padding-left: 1.75rem;
+  text-indent: -1.75rem;
+  color: #d8d8d2;
+  line-height: 1.6;
+}
+ 
+.pub-entry em { font-style: italic; }
+ 
+.pub-entry a {
+  word-break: break-all;
+}
+ 
 /* ---------- fac 006: contact ---------- */
-
+ 
 .contact-list {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
 }
-
+ 
 .contact-list a {
-  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   padding: 0.4rem 0;
   border-bottom: 1px solid var(--grey-line);
 }
 .contact-list a:hover { color: var(--accent); }
-
+ 
 /* ---------- footer ---------- */
-
+ 
 footer {
+  position: relative;
   padding: 2.5rem var(--edge) 3.5rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
@@ -265,16 +357,32 @@ footer {
   letter-spacing: 0.08em;
   color: var(--grey);
 }
-
-/* ---------- reveal-on-scroll (respects reduced motion) ---------- */
-
+ 
+.footer-cipher { margin-bottom: 0; }
+ 
+/* hazard stripe reprised above the footer */
+footer::before {
+  content: "";
+  display: block;
+  height: 6px;
+  width: calc(100% + (var(--edge) * 2));
+  margin: 0 calc(var(--edge) * -1) clamp(1.5rem, 4vw, 2.5rem);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--black) 0 10px,
+    var(--accent) 10px 20px
+  );
+}
+ 
+/* ---------- reveal-on-scroll ---------- */
+ 
 .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .reveal.in { opacity: 1; transform: translateY(0); }
-
+ 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
