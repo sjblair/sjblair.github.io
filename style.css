@@ -190,29 +190,20 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
  
 /* ---------- fac 001: profile + scrobble spectrograph ---------- */
  
-.spectrograph .body { max-width: none; }
- 
 .profile-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
 }
  
 .profile-text .body,
 .profile-text p { max-width: 52ch; }
  
-.profile-chart { align-self: center; }
- 
-@media (max-width: 800px) {
-  .profile-grid { grid-template-columns: 1fr; }
-  .profile-chart { order: -1; }
-}
- 
 .chart-frame {
   border: 1px solid var(--grey-line);
   background: var(--black);
   padding: clamp(0.75rem, 2vw, 1.5rem);
+  max-width: 52ch;
 }
  
 .chart-frame svg { display: block; width: 100%; height: auto; }
@@ -326,7 +317,28 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent); }
   word-break: break-all;
 }
  
-/* ---------- fac 006: contact ---------- */
+/* ---------- fac 006: sufferance ---------- */
+ 
+.suffer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+ 
+.suffer-list li {
+  color: #d8d8d2;
+  line-height: 1.6;
+}
+ 
+.suffer-list strong {
+  color: var(--white);
+  font-weight: 700;
+}
+ 
+/* ---------- fac 007: contact ---------- */
  
 .contact-list {
   display: flex;
